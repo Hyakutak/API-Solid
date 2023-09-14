@@ -19,10 +19,10 @@ export class RegisterUseCase {
     async execute({ name, email, password }: registerServiceRequest): Promise<RegisterServiceResponse> {
         const password_hash = await hash(password, 6);
     
-        const ExistEmailUser = await this.usersRepository.findByEmail(email)
+        const ExistEmailUser = await this.usersRepository.findByEmail(email);
     
         if(ExistEmailUser) {
-            throw new UserAlreadyExistError()
+            throw new UserAlreadyExistError();
         }
     
         const user = await this.usersRepository.create({
